@@ -1,0 +1,262 @@
+# Go Cheat Sheet
+
+## Credits
+
+Most example code taken from [A Tour of Go](http://tour.golang.org/), which is an excellent introduction to Go.
+If you're new to Go, do that tour. Seriously.
+
+## Go in a Nutshell
+
+* Imperative language
+* Statically typed
+* Syntax similar to Java/C/C++, but less parantheses and no semicolons
+* Compiles to native code (no JVM)
+* No classes, but structs with methods
+* Interfaces
+* No implementation inheritance. There's [type embedding](http://golang.org/doc/effective%5Fgo.html#embedding), though.
+* Functions are first class citizens
+* Closures
+* Built-in concurrency primitives: Goroutines and Channels
+
+# Basic Syntax
+
+## Hello World
+File `hello.go`:
+```
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello Go")
+}
+```
+`$ go run hello.go`
+
+
+## Declarations
+* Type goes after identifier! 
+* `var foo int // declaration without initialization`
+* `var foo int = 42 // declaration with initialization`
+* `var foo, bar int = 42, 1302 // declare and init multiple vars at once`
+* `var foo = 42 // type omitted, will be inferred`
+* `foo := 42 // shorthand, only in func bodies, omit var keyword, type is always implicit `
+* `const constant = "This is a constant"`
+
+## Functions
+```
+// a simple function
+func functionName() {}
+
+// function with parameters (again, types go after identifiers)
+func functionName(param1 string, param2 int) {}
+
+// multiple parameters of the same type
+func functionName(param1, param2 int) {}
+
+// return type declaration
+func functionName() (int) {
+    return 42
+}
+
+// Can return multiple values at once
+func returnMulti() (int, string) {
+    return 42, "foobar"
+}
+var x, str = returnMulti()
+
+// Return multiple named results simply by return
+func returnMulti2() (n int, s string) {
+    n = 42
+    s = "foobar"
+    // n and s will be returned
+    return
+}
+var x, str = returnMulti2()
+
+```
+
+### Functions As Values And Closures
+```
+func main() {
+    // assign a function to a name
+    add := func(a, b int) int {
+        return a + b
+    }
+    // use the name to call the function
+    fmt.Println(add(3, 4))
+}
+
+// Closures: Functions can access values that were in scope when defining the
+// function
+
+// adder returns an anonymous function with a closure containing the variable sum
+func adder() func(int) int {
+    sum := 0
+    return func(x int) int {
+        sum += x // sum is declared outside, but still visible
+        return sum
+    }
+}
+func main() {
+    // Create and assign two adding functions. Each has its own sum variable!
+    pos, neg := adder(), adder()
+    for i := 0; i < 10; i++ {
+        fmt.Println(
+            pos(i),
+            neg(-2*i),
+        )
+    }
+}
+```
+
+## Built-in Types
+```
+bool
+
+string
+
+int  int8  int16  int32  int64
+uint uint8 uint16 uint32 uint64 uintptr
+
+byte // alias for uint8
+
+rune // alias for int32 ~= a character (Unicode code point) - very Viking
+
+float32 float64
+
+complex64 complex128
+```
+
+## Packages 
+* package declaration at top of every source file
+* executables are in package `main`
+* convention: package name == last name of import path (import path `math/rand` => package `rand`)
+* upper case identifier: exported (visible from other packages)
+* Lower case identifier: private (not visible from other packages) 
+
+## Type Conversions
+```
+var i int = 42
+var f float64 = float64(i)
+var u uint = uint(f)
+
+// alternative syntax
+i := 42
+f := float64(i)
+u := uint(f)
+```
+
+## Control structures
+```
+    if x > 0 {
+    } else {
+    }
+
+    // There's only `for`, no `while`, no `until`
+    for i := 1; i < 10; i++ {
+    }
+    for ; i < 10;  { // while - loop
+    }
+    for i < 10  { // you can omit semicolons if there is only a condition
+    }
+    for { // you can omit the condition ~ while (true)
+    }
+
+    // TODO switch
+```
+
+## Arrays, Slices, Ranges, Maps
+TODO
+
+## Pointers
+TODO
+
+## Structs
+
+There are no classes, only structs. Structs can have methods.
+```
+// A struct is a type. It's also a collection of fields 
+type Vertex struct {
+    X, Y int
+}
+
+// You can declare methods on structs. The struct you want to declare the
+// method on (the receiving type) comes between the the func keyword and
+// the method name. The struct is copied on each method call(!)
+func (v Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// For mutating methods, you need to use a pointer to the Struct as the
+// receiving type. With this, the struct value is not copied for the
+// method call
+func (v *Vertex) add(n float64) {
+    v.X += n
+    v.Y += n
+}
+
+
+var v = Vertex{1, 2}
+v.X = 4
+```
+
+## Interfaces
+TODO
+
+## Errors
+TODO
+
+# Concurrency
+
+## Goroutines
+Goroutines are lightweight threads (managed by Go, not OS threads). `go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
+
+```
+// just a function (which can be later started as a goroutine)
+func doStuff(s string) {
+}
+
+func main() {
+    // using a named function in a goroutine
+    go doStuff("foobar")
+
+    // using an anonymous inner function in a goroutine
+    go func (x int) {
+        // function body goes here
+    }(42)
+}
+```
+
+## Channels
+TODO
+
+# Snippets
+
+## HTTP Server
+```
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+// define a type for the response
+type Hello struct{}
+
+// let that type implement the ServeHTTP method (defined in interface http.Handler)
+func (h Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprint(w, "Hello!")
+}
+
+func main() {
+    var h Hello
+    http.ListenAndServe("localhost:4000", h)
+}
+
+// Here's the method signature of http.ServeHTTP:
+// type Handler interface {
+//     ServeHTTP(w ResponseWriter, r *Request)
+// }
+```
