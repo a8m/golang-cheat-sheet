@@ -16,6 +16,7 @@ If you're new to Go, do that tour. Seriously.
 * No implementation inheritance. There's [type embedding](http://golang.org/doc/effective%5Fgo.html#embedding), though.
 * Functions are first class citizens
 * Closures
+* Pointers, but not pointer arithmetic
 * Built-in concurrency primitives: Goroutines and Channels
 
 # Basic Syntax
@@ -128,13 +129,6 @@ float32 float64
 complex64 complex128
 ```
 
-## Packages 
-* package declaration at top of every source file
-* executables are in package `main`
-* convention: package name == last name of import path (import path `math/rand` => package `rand`)
-* upper case identifier: exported (visible from other packages)
-* Lower case identifier: private (not visible from other packages) 
-
 ## Type Conversions
 ```
 var i int = 42
@@ -146,6 +140,13 @@ i := 42
 f := float64(i)
 u := uint(f)
 ```
+
+## Packages 
+* package declaration at top of every source file
+* executables are in package `main`
+* convention: package name == last name of import path (import path `math/rand` => package `rand`)
+* upper case identifier: exported (visible from other packages)
+* Lower case identifier: private (not visible from other packages) 
 
 ## Control structures
 ```
@@ -166,8 +167,40 @@ u := uint(f)
     // TODO switch
 ```
 
-## Arrays, Slices, Ranges, Maps
-TODO
+## Arrays, Slices, Ranges
+```
+var a [10]int // declare an int array with lenght 10
+var a = []int {1, 2, 3, 4} // declare and initialize array
+a := []int{ 1, 2, 3, 4 } // shorthand
+var b = a[lo:hi] // creates a slice (view of the array) from index lo to hi-1
+var b = a[1:4] // slice from index 1 to 3
+
+len(a) // gives you the length of an array/a slice. It's a built-in function, not a attribute/method on the array. 
+
+// loop over an array
+for i, e := range a {
+    // i is the index, e the element
+}
+
+// you'll get a compiler error if you're not using i and e. If you only need e:
+for _, e := range a {
+    // e is the element
+}
+
+// ...and if you only need the index
+for i := range a {
+}
+
+```
+
+## Maps
+
+```
+var m map[string]int
+m = make(map[string]int)
+m["answer"] = 42
+fmt.Println(m["answer"])
+```
 
 ## Pointers
 TODO
@@ -202,6 +235,9 @@ v.X = 4
 ```
 
 ## Interfaces
+TODO
+
+## Type Embedding
 TODO
 
 ## Errors
