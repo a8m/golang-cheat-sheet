@@ -15,7 +15,8 @@ If you're new to Go, do that tour. Seriously.
 * Interfaces
 * No implementation inheritance. There's [type embedding](http://golang.org/doc/effective%5Fgo.html#embedding), though.
 * Functions are first class citizens
-* Closures
+* Functions can return multiple values
+* Go has closures
 * Pointers, but not pointer arithmetic
 * Built-in concurrency primitives: Goroutines and Channels
 
@@ -149,11 +150,25 @@ u := uint(f)
 * Lower case identifier: private (not visible from other packages) 
 
 ## Control structures
+
+### If
 ```
     if x > 0 {
+        return x
     } else {
+        return -x
     }
 
+    // You can put one statement before the condition
+    if a := b + c; a < 42 {
+        return a
+    } else {
+        return a - 42
+    }
+```
+
+### Loops
+```
     // There's only `for`, no `while`, no `until`
     for i := 1; i < 10; i++ {
     }
@@ -163,21 +178,61 @@ u := uint(f)
     }
     for { // you can omit the condition ~ while (true)
     }
+```
 
-    // TODO switch
+### Switch
+```
+    // switch
+    switch operatingSystem {
+    case "darwin":
+        fmt.Println("Mac OS Hipster")
+    case "linux":
+        fmt.Println("Linux Geek")
+    default:
+        // Windows, BSD, ...
+        fmt.Println("Other")
+    }
+
+    // as with for and if, you can have an assignment statement before the switch value 
+    switch os := runtime.GOOS; os {
+    case "darwin": ...
+    }
 ```
 
 ## Arrays, Slices, Ranges
+
+### Arrays
 ```
-var a [10]int // declare an int array with lenght 10
-var a = []int {1, 2, 3, 4} // declare and initialize array
+var a [10]int // declare an int array with lenght 10. Array length is part of the type!
+a[3] = 42     // set elements
+i := a[3]     // read elements
+
+// declare and initialize
+a := [2]int{1, 2}
+a := [...]int{1, 2} // elipsis -> Compiler figures out array length
+```
+
+### Slices
+```
+var a []int // declare a slice - similar to an array, but length is unspecified
+var a = []int {1, 2, 3, 4} // declare and initialize a slize (backed by the array given implicitly)
 a := []int{ 1, 2, 3, 4 } // shorthand
+
+
 var b = a[lo:hi] // creates a slice (view of the array) from index lo to hi-1
 var b = a[1:4] // slice from index 1 to 3
 
-len(a) // gives you the length of an array/a slice. It's a built-in function, not a attribute/method on the array. 
+// create a slice with make
+a = make([]byte, 5, 5) // first arg length, second capacity
+a = make([]byte, 5) // capacity is optional
 
-// loop over an array
+```
+
+### Operations on Arrays and Slices
+`len(a)` gives you the length of an array/a slice. It's a built-in function, not a attribute/method on the array.
+
+```
+// loop over an array/a slice
 for i, e := range a {
     // i is the index, e the element
 }
@@ -198,21 +253,37 @@ for i := range a {
 ```
 var m map[string]int
 m = make(map[string]int)
-m["answer"] = 42
-fmt.Println(m["answer"])
-```
+m["key"] = 42
+fmt.Println(m["key"])
 
-## Pointers
-TODO
+delete(m, "key")
+
+elem, ok = m["key"] // test if key "key" is present and retrieve it, if so
+
+// map literal
+var m = map[string]Vertex{
+    "Bell Labs": {40.68433, -74.39967},
+    "Google":    {37.42202, -122.08408},
+}
+
+```
 
 ## Structs
 
 There are no classes, only structs. Structs can have methods.
 ```
 // A struct is a type. It's also a collection of fields 
+
+// Declaration
 type Vertex struct {
     X, Y int
 }
+
+// Creating
+var v = Vertex{1, 2}
+
+// Accessing members
+v.X = 4
 
 // You can declare methods on structs. The struct you want to declare the
 // method on (the receiving type) comes between the the func keyword and
@@ -221,17 +292,27 @@ func (v Vertex) Abs() float64 {
     return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
-// For mutating methods, you need to use a pointer to the Struct as the
-// receiving type. With this, the struct value is not copied for the
-// method call
+// Call method
+v.Abs()
+
+// For mutating methods, you need to use a pointer (see below) to the Struct
+// as the type. With this, the struct value is not copied for the method call.
 func (v *Vertex) add(n float64) {
     v.X += n
     v.Y += n
 }
 
+```
 
-var v = Vertex{1, 2}
-v.X = 4
+## Pointers
+```
+p := Vertex{1, 2}  // p is a Vertex
+q := &p            // q is a pointer to a Vertex
+r := &Vertex{1, 2} // r is also a pointer to a Vertex
+
+// The type of a pointer to a Vertex is *Vertex
+
+var s *Vertex = new(Vertex) // new creates a pointer to a new struct instance 
 ```
 
 ## Interfaces
