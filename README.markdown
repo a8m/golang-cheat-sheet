@@ -100,16 +100,6 @@ func adder() func(int) int {
         return sum
     }
 }
-func main() {
-    // Create and assign two adding functions. Each has its own sum variable!
-    pos, neg := adder(), adder()
-    for i := 0; i < 10; i++ {
-        fmt.Println(
-            pos(i),
-            neg(-2*i),
-        )
-    }
-}
 ```
 
 ## Built-in Types
@@ -182,10 +172,11 @@ u := uint(f)
 
 ### Switch
 ```
-    // switch
+    // switch statement
     switch operatingSystem {
     case "darwin":
         fmt.Println("Mac OS Hipster")
+        // cases break automatically, no fallthrough by default
     case "linux":
         fmt.Println("Linux Geek")
     default:
@@ -316,13 +307,46 @@ var s *Vertex = new(Vertex) // new creates a pointer to a new struct instance
 ```
 
 ## Interfaces
-TODO
+```
+// interface declaration
+type Awesomizer interface {
+    Awesomize() string
+}
+
+// types do *not* declare to implement interaces
+type Foo struct {}
+
+// instead, types implicitly satisfy an interface if they implement all required methods
+func (foo Foo) Awesomize() string {
+    return "Awesome!"
+}
+```
 
 ## Type Embedding
 TODO
 
 ## Errors
-TODO
+There is no exception handling. Functions that might produce an error just declare an additional return value of type `Error`. This is the `Error` interface:
+```
+type error interface {
+    Error() string
+}
+```
+
+A function that might return an error:
+```
+func doStuff() (int, Error) {
+}
+
+func main() {
+    result, error := doStuff()
+    if (error != nil) {
+        // handle error
+    } else {
+        // all is good, use result
+    }
+}
+```
 
 # Concurrency
 
@@ -346,8 +370,38 @@ func main() {
 ```
 
 ## Channels
-TODO
+```
+ch := make(chan int) // create a channel of type int
+ch <- 42             // Send a value to the channel ch.
+v := <-ch            // Receive a value from ch
 
+// Non-buffered channels block. Read blocks when no value is available, write blocks if a value already has been written but not read.
+
+// Create a buffered channel. Writing to a buffered channels does not block if less than <buffer size> unread values have been written.
+ch := make(chan int, 100)
+
+close(c) // closes the channel (only sender should close)
+
+// read from channel and test if it has been closed
+v, ok := <-ch
+
+// if ok is false, channel has been closed
+
+// Read from channel until it is closed
+for i := range ch {
+    fmt.Println(i)
+}
+
+// select blocks on multiple channel operations, if one unblocks, the corresponding case is executed
+func doStuff(channelOut, channelIn chan int) {
+    select {
+    case channelOut <- 42:
+        fmt.Println("We could write to channelOut!")
+    case x := <- channelIn:
+        fmt.Println("We could read from channelIn")
+    }
+}
+```
 # Snippets
 
 ## HTTP Server
