@@ -335,7 +335,7 @@ type error interface {
 
 A function that might return an error:
 ```
-func doStuff() (int, Error) {
+func doStuff() (int, error) {
 }
 
 func main() {
