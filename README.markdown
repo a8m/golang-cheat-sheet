@@ -428,6 +428,6 @@ func main() {
 
 // Here's the method signature of http.ServeHTTP:
 // type Handler interface {
-//     ServeHTTP(w ResponseWriter, r *Request)
+//     ServeHTTP(w http.ResponseWriter, r *http.Request)
 // }
 ```
