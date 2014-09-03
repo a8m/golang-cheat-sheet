@@ -249,7 +249,7 @@ fmt.Println(m["key"])
 
 delete(m, "key")
 
-elem, ok = m["key"] // test if key "key" is present and retrieve it, if so
+elem, ok := m["key"] // test if key "key" is present and retrieve it, if so
 
 // map literal
 var m = map[string]Vertex{
