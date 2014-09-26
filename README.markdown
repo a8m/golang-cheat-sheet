@@ -212,6 +212,8 @@ a := []int{ 1, 2, 3, 4 } // shorthand
 
 var b = a[lo:hi] // creates a slice (view of the array) from index lo to hi-1
 var b = a[1:4] // slice from index 1 to 3
+var b = a[:3] // missing low index implies 0
+var b = a[3:] // missing high index implies len(a)
 
 // create a slice with make
 a = make([]byte, 5, 5) // first arg length, second capacity
