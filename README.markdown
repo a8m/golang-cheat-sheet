@@ -24,7 +24,7 @@ If you're new to Go, do that tour. Seriously.
 
 ## Hello World
 File `hello.go`:
-```
+```go
 package main
 
 import "fmt"
