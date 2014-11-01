@@ -24,7 +24,7 @@ If you're new to Go, do that tour. Seriously.
 
 ## Hello World
 File `hello.go`:
-```
+```go
 package main
 
 import "fmt"
@@ -46,7 +46,7 @@ func main() {
 * `const constant = "This is a constant"`
 
 ## Functions
-```
+```go
 // a simple function
 func functionName() {}
 
@@ -79,7 +79,7 @@ var x, str = returnMulti2()
 ```
 
 ### Functions As Values And Closures
-```
+```go
 func main() {
     // assign a function to a name
     add := func(a, b int) int {
@@ -121,7 +121,7 @@ complex64 complex128
 ```
 
 ## Type Conversions
-```
+```go
 var i int = 42
 var f float64 = float64(i)
 var u uint = uint(f)
@@ -142,7 +142,7 @@ u := uint(f)
 ## Control structures
 
 ### If
-```
+```go
     if x > 0 {
         return x
     } else {
@@ -158,7 +158,7 @@ u := uint(f)
 ```
 
 ### Loops
-```
+```go
     // There's only `for`, no `while`, no `until`
     for i := 1; i < 10; i++ {
     }
@@ -171,7 +171,7 @@ u := uint(f)
 ```
 
 ### Switch
-```
+```go
     // switch statement
     switch operatingSystem {
     case "darwin":
@@ -193,7 +193,7 @@ u := uint(f)
 ## Arrays, Slices, Ranges
 
 ### Arrays
-```
+```go
 var a [10]int // declare an int array with lenght 10. Array length is part of the type!
 a[3] = 42     // set elements
 i := a[3]     // read elements
@@ -204,7 +204,7 @@ a := [...]int{1, 2} // elipsis -> Compiler figures out array length
 ```
 
 ### Slices
-```
+```go
 var a []int // declare a slice - similar to an array, but length is unspecified
 var a = []int {1, 2, 3, 4} // declare and initialize a slize (backed by the array given implicitly)
 a := []int{ 1, 2, 3, 4 } // shorthand
@@ -224,7 +224,7 @@ a = make([]byte, 5) // capacity is optional
 ### Operations on Arrays and Slices
 `len(a)` gives you the length of an array/a slice. It's a built-in function, not a attribute/method on the array.
 
-```
+```go
 // loop over an array/a slice
 for i, e := range a {
     // i is the index, e the element
@@ -243,7 +243,7 @@ for i := range a {
 
 ## Maps
 
-```
+```go
 var m map[string]int
 m = make(map[string]int)
 m["key"] = 42
@@ -264,7 +264,7 @@ var m = map[string]Vertex{
 ## Structs
 
 There are no classes, only structs. Structs can have methods.
-```
+```go
 // A struct is a type. It's also a collection of fields 
 
 // Declaration
@@ -298,7 +298,7 @@ func (v *Vertex) add(n float64) {
 ```
 
 ## Pointers
-```
+```go
 p := Vertex{1, 2}  // p is a Vertex
 q := &p            // q is a pointer to a Vertex
 r := &Vertex{1, 2} // r is also a pointer to a Vertex
@@ -309,7 +309,7 @@ var s *Vertex = new(Vertex) // new creates a pointer to a new struct instance
 ```
 
 ## Interfaces
-```
+```go
 // interface declaration
 type Awesomizer interface {
     Awesomize() string
@@ -329,14 +329,14 @@ TODO
 
 ## Errors
 There is no exception handling. Functions that might produce an error just declare an additional return value of type `Error`. This is the `Error` interface:
-```
+```go
 type error interface {
     Error() string
 }
 ```
 
 A function that might return an error:
-```
+```go
 func doStuff() (int, error) {
 }
 
@@ -355,7 +355,7 @@ func main() {
 ## Goroutines
 Goroutines are lightweight threads (managed by Go, not OS threads). `go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
 
-```
+```go
 // just a function (which can be later started as a goroutine)
 func doStuff(s string) {
 }
@@ -372,7 +372,7 @@ func main() {
 ```
 
 ## Channels
-```
+```go
 ch := make(chan int) // create a channel of type int
 ch <- 42             // Send a value to the channel ch.
 v := <-ch            // Receive a value from ch
@@ -407,7 +407,7 @@ func doStuff(channelOut, channelIn chan int) {
 # Snippets
 
 ## HTTP Server
-```
+```go
 package main
 
 import (
