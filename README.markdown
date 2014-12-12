@@ -57,7 +57,7 @@ func functionName(param1 string, param2 int) {}
 func functionName(param1, param2 int) {}
 
 // return type declaration
-func functionName() (int) {
+func functionName() int {
     return 42
 }
 
@@ -212,7 +212,7 @@ u := uint(f)
 
 ### Arrays
 ```go
-var a [10]int // declare an int array with lenght 10. Array length is part of the type!
+var a [10]int // declare an int array with length 10. Array length is part of the type!
 a[3] = 42     // set elements
 i := a[3]     // read elements
 
@@ -224,7 +224,7 @@ a := [...]int{1, 2} // elipsis -> Compiler figures out array length
 ### Slices
 ```go
 var a []int // declare a slice - similar to an array, but length is unspecified
-var a = []int {1, 2, 3, 4} // declare and initialize a slize (backed by the array given implicitly)
+var a = []int {1, 2, 3, 4} // declare and initialize a slice (backed by the array given implicitly)
 a := []int{ 1, 2, 3, 4 } // shorthand
 
 
