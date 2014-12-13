@@ -248,13 +248,19 @@ for i, e := range a {
     // i is the index, e the element
 }
 
-// you'll get a compiler error if you're not using i and e. If you only need e:
+// if you only need e:
 for _, e := range a {
     // e is the element
 }
 
 // ...and if you only need the index
 for i := range a {
+}
+
+// In Go pre-1.4, you'll get a compiler error if you're not using i and e.
+// Go 1.4 introduced a variable-free form, so that you can do this
+for range time.Tick(time.Second) {
+    // do it once a sec
 }
 
 ```
