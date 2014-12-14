@@ -298,6 +298,7 @@ type Vertex struct {
 
 // Creating
 var v = Vertex{1, 2}
+var v = Vertex{x: 1, y: 2} // Creates a struct by defining values with keys 
 
 // Accessing members
 v.X = 4
