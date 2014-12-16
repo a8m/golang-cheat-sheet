@@ -237,6 +237,9 @@ var b = a[3:] // missing high index implies len(a)
 a = make([]byte, 5, 5) // first arg length, second capacity
 a = make([]byte, 5) // capacity is optional
 
+// create a slice from an array
+x := [3]string{"Лайка", "Белка", "Стрелка"}
+s := x[:] // a slice referencing the storage of x
 ```
 
 ### Operations on Arrays and Slices
