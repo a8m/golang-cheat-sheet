@@ -45,7 +45,7 @@ func main() {
 |`/`|quotient|
 |`%`|remainder|
 |`&`|bitwise and|
-|`\|`|bitwise or|
+|`|`|bitwise or|
 |`^`|bitwise xor|
 |`&^`|bit clear (and not)|
 |`<<`|left shift|
@@ -65,7 +65,7 @@ func main() {
 |Operator|Description|
 |--------|-----------|
 |`&&`|logical and|
-|`\|\|`|logical or|
+|`||`|logical or|
 |`!`|logical not|
 
 ### Other
