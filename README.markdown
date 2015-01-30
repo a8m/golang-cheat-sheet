@@ -468,6 +468,8 @@ func doStuff(channelOut, channelIn chan int) {
         fmt.Println("We could write to channelOut!")
     case x := <- channelIn:
         fmt.Println("We could read from channelIn")
+    case <-time.After(time.Second * 1):
+        fmt.Println("timeout")
     }
 }
 ```
