@@ -128,16 +128,29 @@ func main() {
     fmt.Println(add(3, 4))
 }
 
-// Closures: Functions can access values that were in scope when defining the
-// function
+// Closures, lexically scoped: Functions can access values that were
+// in scope when defining the function
+func scope() func() int{
+    outer_var := 2
+    foo := func() int { return outer_var}
+    return foo
+}
 
-// adder returns an anonymous function with a closure containing the variable sum
-func adder() func(int) int {
-    sum := 0
-    return func(x int) int {
-        sum += x // sum is declared outside, but still visible
-        return sum
+func another_scope() func() int{
+    outer_var = 444
+    return foo // foo() will return 2
+}
+
+
+// Closures: don't mutate outer vars, instead redefine them!
+func outer() func() int, int{
+    outer_var := 2
+    inner := func() int {
+        outer_var += 99 // attempt to mutate outer_var from outer scope
+        return outer_var // => 101 (but outer_var is a newly redefined
+                         //         variable visible only inside inner)
     }
+    return foo, outer_var // => 101, 2 (outer_var is still 2, not mutated by foo!)
 }
 ```
 
