@@ -303,7 +303,8 @@ a[3] = 42     // set elements
 i := a[3]     // read elements
 
 // declare and initialize
-a := [2]int{1, 2}
+var a = [2]int{1, 2}
+a := [2]int{1, 2} //shorthand
 a := [...]int{1, 2} // elipsis -> Compiler figures out array length
 ```
 
