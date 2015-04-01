@@ -566,7 +566,7 @@ func doStuff(channelOut, channelIn chan int) {
   c <- "Hello, World!"
   // fatal error: all goroutines are asleep - deadlock!
   ```
-- A recieve from a nil channel blocks forever
+- A receive from a nil channel blocks forever
 
   ```go
   var c chan string
