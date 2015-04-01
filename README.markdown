@@ -556,6 +556,44 @@ func doStuff(channelOut, channelIn chan int) {
     }
 }
 ```
+
+### Channel Axioms
+- A send to a nil channel blocks forever
+
+  ```go
+  var c chan string
+  c <- "Hello, World!"
+  // fatal error: all goroutines are asleep - deadlock!
+  ```
+- A recieve from a nil channel blocks forever
+
+  ```go
+  var c chan string
+  fmt.Println(<-c)
+  // fatal error: all goroutines are asleep - deadlock!
+  ```
+- A send to a closed channel panics
+
+  ```go
+  var c = make(chan string, 1)
+  c <- "Hello, World!"
+  close(c)
+  c <- "Hello, Panic!"
+  // panic: send on closed channel
+  ```
+- A receive from a closed channel returns the zero value immediately
+
+  ```go
+  var c = make(chan int, 2)
+  c <- 1
+  c <- 2
+  close(c)
+  for i := 0; i < 3; i++ {
+      fmt.Printf("%d ", <-c) 
+  }
+  // 1 2 0
+  ```
+
 # Snippets
 
 ## HTTP Server
