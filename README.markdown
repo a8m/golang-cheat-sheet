@@ -31,6 +31,7 @@
 16. [Concurrency](#concurrency)
   * [Goroutines](#goroutines)
   * [Channels](#channels)
+  * [Channel Axioms](#channel-axioms)
 17. [Snippets](#snippets)
   * [Http-Server](#http-server)
 
@@ -84,7 +85,7 @@ func main() {
 |`&^`|bit clear (and not)|
 |`<<`|left shift|
 |`>>`|right shift|
-
+/.
 ### Comparison
 |Operator|Description|
 |--------|-----------|
