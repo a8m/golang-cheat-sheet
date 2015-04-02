@@ -85,7 +85,7 @@ func main() {
 |`&^`|bit clear (and not)|
 |`<<`|left shift|
 |`>>`|right shift|
-/.
+
 ### Comparison
 |Operator|Description|
 |--------|-----------|
