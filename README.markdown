@@ -422,6 +422,13 @@ func (v *Vertex) add(n float64) {
 }
 
 ```
+**Anonymous structs:**  
+Cheaper and safer than using `map[string]interface{}`.
+```go
+point := struct {
+	X, Y int
+}{1, 2}
+```
 
 ## Pointers
 ```go
