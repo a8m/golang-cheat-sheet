@@ -192,8 +192,11 @@ func outer() func() int, int{
 ### Variadic Functions
 ```go
 func main() {
-	fmt.Println(adder(1, 2, 3)) // return 6
-	fmt.Println(adder(9, 9)) // return 18
+	fmt.Println(adder(1, 2, 3)) 	// 6
+	fmt.Println(adder(9, 9))	// 18
+	
+	nums := []int{10, 20, 30}
+	fmt.Println(adder(nums...))	// 60
 }
 
 // By using ... before the type name of the last parameter you can indicate that it takes zero or more of those parameters.
