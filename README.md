@@ -1,7 +1,7 @@
 # Go Cheat Sheet
 
 # Index
-1. [Basic-Syntax](#basic-syntax)
+1. [Basic Syntax](#basic-syntax)
 2. [Operators](#operators)
   * [Arithmetic](#arithmetic)
   * [Comparison](#comparison)
@@ -12,7 +12,7 @@
   * [Functions as values and closures](#functions-as-values-and-closures)
   * [Variadic Functions](#variadic-functions)
 5. [Built-in Types](#built-in-types)
-6. [Type Concersions](#type-conversions)
+6. [Type Conversions](#type-conversions)
 7. [Packages](#packages)
 8. [Control structures](#control-structures)
   * [If](#if)
