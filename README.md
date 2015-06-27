@@ -111,13 +111,15 @@ func main() {
 |`<-`|send / receive operator (see 'Channels' below)|
 
 ## Declarations
-* Type goes after identifier! 
-* `var foo int // declaration without initialization`
-* `var foo int = 42 // declaration with initialization`
-* `var foo, bar int = 42, 1302 // declare and init multiple vars at once`
-* `var foo = 42 // type omitted, will be inferred`
-* `foo := 42 // shorthand, only in func bodies, omit var keyword, type is always implicit `
-* `const constant = "This is a constant"`
+Type goes after identifier!
+```go
+var foo int // declaration without initialization
+var foo int = 42 // declaration with initialization
+var foo, bar int = 42, 1302 // declare and init multiple vars at once
+var foo = 42 // type omitted, will be inferred
+foo := 42 // shorthand, only in func bodies, omit var keyword, type is always implicit
+const constant = "This is a constant"
+```
 
 ## Functions
 ```go
