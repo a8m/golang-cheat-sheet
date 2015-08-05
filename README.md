@@ -349,9 +349,7 @@ x := [3]string{"Лайка", "Белка", "Стрелка"}
 s := x[:] // a slice referencing the storage of x
 
 // Delete an element in a slice
-for index, element := range slice{
-  slice = append(slice[:index], slice[index+1:]...)
-}
+  s = append(s[:i], s[i+1:]...) // where i is the index
 ```
 
 ### Operations on Arrays and Slices
