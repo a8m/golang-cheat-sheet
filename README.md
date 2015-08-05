@@ -341,9 +341,17 @@ var b = a[3:]		// missing high index implies len(a)
 a = make([]byte, 5, 5)	// first arg length, second capacity
 a = make([]byte, 5)	// capacity is optional
 
+// Merge slices into one
+a = append(a, b...) 
+
 // create a slice from an array
 x := [3]string{"Лайка", "Белка", "Стрелка"}
 s := x[:] // a slice referencing the storage of x
+
+// Delete an element in a slice
+for index, element := range slice{
+  slice = append(slice[:index], slice[index+1:]...)
+}
 ```
 
 ### Operations on Arrays and Slices
