@@ -44,7 +44,7 @@ If you're new to Go, do that tour. Seriously.
 
 * Imperative language
 * Statically typed
-* Syntax similar to Java/C/C++, but less parentheses and no semicolons
+* Syntax tokens similar to C (but less parentheses and no semicolons) and the structure to Oberon-2
 * Compiles to native code (no JVM)
 * No classes, but structs with methods
 * Interfaces
