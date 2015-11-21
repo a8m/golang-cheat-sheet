@@ -350,6 +350,11 @@ s := x[:] // a slice referencing the storage of x
 `len(a)` gives you the length of an array/a slice. It's a built-in function, not a attribute/method on the array.
 
 ```go
+c := append(a,17,34) // append items to slice a
+d := append(a,b... ) // concatenate slices a and b
+```
+
+```go
 // loop over an array/a slice
 for i, e := range a {
     // i is the index, e the element
