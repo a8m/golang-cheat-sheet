@@ -309,6 +309,17 @@ func main() {
     switch os := runtime.GOOS; os {
     case "darwin": ...
     }
+
+    // you can also make comparisons in switch cases
+    number := 42
+    switch {
+        case number < 42:
+            fmt.Println("Smaller")
+        case number == 42:
+            fmt.Println("Equal")
+        case number > 42:
+            fmt.Println("Greater")
+    }
 ```
 
 ## Arrays, Slices, Ranges
