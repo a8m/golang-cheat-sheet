@@ -336,8 +336,8 @@ var b = a[lo:hi]	// creates a slice (view of the array) from index lo to hi-1
 var b = a[1:4]		// slice from index 1 to 3
 var b = a[:3]		// missing low index implies 0
 var b = a[3:]		// missing high index implies len(a)
-var c = append(a,17,3)  // append items to slice a
-var c = append(a,b...)  // concatenate slices a and b
+c := append(a,17,3)	// append items to slice a
+c := append(a,b...)	// concatenate slices a and b
 
 
 // create a slice with make
