@@ -623,7 +623,7 @@ s := fmt.Sprintln( "My point:", p, "x coord=", p.X ) // print to string variable
 fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17,17.0,17.0) // c-ish format
 s2 := fmt.Sprintf( "%d %f", 17, 17.0 ) // formatted print to string variable
 
-hellos := `
+hellomsg := `
  "Hello" in Chinese is 你好 ('Ni Hao')
  "Hello" in Hindi is नमस्ते ('Namaste')
 ` // multi-line string literal, using back-tick at beginning and end
