@@ -615,7 +615,7 @@ func doStuff(channelOut, channelIn chan int) {
 # Printing
 
 ```go
-fmt.Println("Hello, 你好, Привет, नमस्ते") // basic print, plus newline
+fmt.Println("Hello, 你好, नमस्ते, Привет, ᎣᏏᏲ") // basic print, plus newline
 p := struct { X, Y int }{ 17, 2 }
 fmt.Println( "My point:", p, "x coord=", p.X ) // print structs, ints, etc
 s := fmt.Sprintln( "My point:", p, "x coord=", p.X ) // print to string variable
@@ -624,9 +624,9 @@ fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17,17.0,17.0) // c-ish format
 s2 := fmt.Sprintf( "%d %f", 17, 17.0 ) // formatted print to string variable
 
 multiline := `
- seventeen in base 10 is 17
- seventeen in base 16 is 0x11
-` // multi-line string literal, using back-tick instead of quotes
+ "Hello" in Chinese is 你好 ('Ni Hao')
+ "Hello" in Hindi is नमस्ते ('Namaste')
+` // multi-line string literal, using back-tick at beginning and end
 ```
 
 # Snippets
