@@ -615,17 +615,18 @@ func doStuff(channelOut, channelIn chan int) {
 # Printing
 
 ```go
+fmt.Println("Hello, 你好, Привет, नमस्ते") // basic print, plus newline
 p := struct { X, Y int }{ 17, 2 }
 fmt.Println( "My point:", p, "x coord=", p.X ) // print structs, ints, etc
-fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17.0,17.0) // c-style formatted
+s := fmt.Sprintln( "My point:", p, "x coord=", p.X ) // print to string variable
 
-// multi-line string literal (back tick)
-formatstring := `
- seventeen in base 10: %d
- seventeen as floating point: %f
-`
-s := fmt.Sprintf( formatstring, 17, 17.0 ) // print to string variable
-```
+fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17,17.0,17.0) // c-ish format
+s2 := fmt.Sprintf( "%d %f", 17, 17.0 ) // formatted print to string variable
+
+multiline := `
+ seventeen in base 10 is 17
+ seventeen in base 16 is 0x11
+` // multi-line string literal, using back-tick instead of quotes
 
 # Snippets
 
