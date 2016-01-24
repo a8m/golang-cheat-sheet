@@ -612,7 +612,7 @@ func doStuff(channelOut, channelIn chan int) {
   // 1 2 0
   ```
 
-# Printing
+## Printing
 
 ```go
 fmt.Println("Hello, 你好, नमस्ते, Привет, ᎣᏏᏲ") // basic print, plus newline
