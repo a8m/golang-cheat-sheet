@@ -32,9 +32,9 @@
   * [Goroutines](#goroutines)
   * [Channels](#channels)
   * [Channel Axioms](#channel-axioms)
-17. [Snippets](#snippets)
+17. [Printing](#printing)
+18. [Snippets](#snippets)
   * [Http-Server](#http-server)
-18. [Printing](#printing)
 
 ## Credits
 
@@ -612,6 +612,21 @@ func doStuff(channelOut, channelIn chan int) {
   // 1 2 0
   ```
 
+# Printing
+
+```go
+p := struct { X, Y int }{ 17, 2 }
+fmt.Println( "My point:", p, "x coord=", p.X ) // print structs, ints, etc
+fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17.0,17.0) // c-style formatted
+
+// multi-line string literal (back tick)
+formatstring := `
+ seventeen in base 10: %d
+ seventeen as floating point: %f
+`
+s := fmt.Sprintf( formatstring, 17, 17.0 ) // print to string variable
+```
+
 # Snippets
 
 ## HTTP Server
@@ -641,19 +656,3 @@ func main() {
 //     ServeHTTP(w http.ResponseWriter, r *http.Request)
 // }
 ```
-# Printing
-
-```go
-p := struct { X, Y int }{ 17, 2 }
-fmt.Println( "My point:", p, "x coord=", p.X ) // print structs, ints, etc
-fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17.0,17.0) // c-style formatted
-
-// multi-line string literal (back tick)
-formatstring := `
- seventeen in base 10: %d
- seventeen as floating point: %f
-`
-s := fmt.Sprintf( formatstring, 17, 17.0 ) // print to string variable
-fmt.Println(s)
-```
-
