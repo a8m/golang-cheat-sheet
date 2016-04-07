@@ -276,20 +276,16 @@ func main() {
 	if str, ok := val.(string); ok {
 		fmt.Println(str)
 	}
-}
-```
 
-### Loops
-```go
-    // There's only `for`, no `while`, no `until`
-    for i := 1; i < 10; i++ {
-    }
-    for ; i < 10;  { // while - loop
-    }
-    for i < 10  { // you can omit semicolons if there is only a condition
-    }
-    for { // you can omit the condition ~ while (true)
-    }
+	// No ternary operator, this would be the closest implementation
+	func min(x, y int) int{
+		if x < y {
+			return x
+		}
+		return y
+	}
+	c := min(5,6)
+}
 ```
 
 ### Switch
@@ -320,6 +316,19 @@ func main() {
             fmt.Println("Equal")
         case number > 42:
             fmt.Println("Greater")
+    }
+```
+
+### Loops
+```go
+    // There's only `for`, no `while`, no `until`
+    for i := 1; i < 10; i++ {
+    }
+    for ; i < 10;  { // while - loop
+    }
+    for i < 10  { // you can omit semicolons if there is only a condition
+    }
+    for { // you can omit the condition ~ while (true)
     }
 ```
 
@@ -418,7 +427,7 @@ type Vertex struct {
 }
 
 // Creating
-var v = Vertex{1, 2}
+var v = Vertex{1, 2} //Creates and defines struct variables, left to right, up to down
 var v = Vertex{X: 1, Y: 2} // Creates a struct by defining values with keys 
 var v = []Vertex{{1,2},{5,2},{5,5}} // Initialize a slice of structs
 
