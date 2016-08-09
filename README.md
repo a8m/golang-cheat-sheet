@@ -451,6 +451,14 @@ point := struct {
 }{1, 2}
 ```
 
+**Struct member with tags:**
+```go
+type Size struct {
+	Hight int `desciption:"Hight in pixel"`
+	Width int `desciption:"Width in pixel"`
+}
+```
+
 ## Pointers
 ```go
 p := Vertex{1, 2}  // p is a Vertex
