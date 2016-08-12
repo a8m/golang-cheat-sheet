@@ -245,10 +245,10 @@ u := uint(f)
 ```
 
 ## Packages 
-* package declaration at top of every source file
-* executables are in package `main`
-* convention: package name == last name of import path (import path `math/rand` => package `rand`)
-* upper case identifier: exported (visible from other packages)
+* Package declaration at top of every source file
+* Executables are in package `main`
+* Convention: package name == last name of import path (import path `math/rand` => package `rand`)
+* Upper case identifier: exported (visible from other packages)
 * Lower case identifier: private (not visible from other packages) 
 
 ## Control structures
