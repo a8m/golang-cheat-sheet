@@ -532,7 +532,7 @@ func main() {
 # Concurrency
 
 ## Goroutines
-Goroutines are lightweight threads (managed by Go, not OS threads). `go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
+`go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
 
 ```go
 // just a function (which can be later started as a goroutine)
