@@ -532,7 +532,7 @@ func main() {
 # Concurrency
 
 ## Goroutines
-`go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
+A goroutine is a function that is capable of running concurrently with other functions. `go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
 
 ```go
 // just a function (which can be later started as a goroutine)
