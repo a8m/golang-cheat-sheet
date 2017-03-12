@@ -561,7 +561,7 @@ v := <-ch            // Receive a value from ch
 // Create a buffered channel. Writing to a buffered channels does not block if less than <buffer size> unread values have been written.
 ch := make(chan int, 100)
 
-close(c) // closes the channel (only sender should close)
+close(ch) // closes the channel (only sender should close)
 
 // read from channel and test if it has been closed
 v, ok := <-ch
