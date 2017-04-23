@@ -355,9 +355,15 @@ c := append(a,b...)	// concatenate slices a and b
 a = make([]byte, 5, 5)	// first arg length, second capacity
 a = make([]byte, 5)	// capacity is optional
 
+// Merge slices into one
+a = append(a, b...) 
+
 // create a slice from an array
 x := [3]string{"Лайка", "Белка", "Стрелка"}
 s := x[:] // a slice referencing the storage of x
+
+// Delete an element in a slice
+  s = append(s[:i], s[i+1:]...) // where i is the index
 ```
 
 ### Operations on Arrays and Slices
