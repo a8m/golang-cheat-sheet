@@ -81,7 +81,7 @@ func main() {
 |`/`|quotient|
 |`%`|remainder|
 |`&`|bitwise and|
-|`|`|bitwise or|
+|`\|`|bitwise or|
 |`^`|bitwise xor|
 |`&^`|bit clear (and not)|
 |`<<`|left shift|
