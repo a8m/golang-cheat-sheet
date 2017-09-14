@@ -35,6 +35,8 @@
 17. [Printing](#printing)
 18. [Snippets](#snippets)
   * [Http-Server](#http-server)
+19. [Defer And Panic](#defer-panic)
+  
 
 ## Credits
 
@@ -406,7 +408,8 @@ var m = map[string]Vertex{
 
 ```
 
-## Structs
+## 
+
 
 There are no classes, only structs. Structs can have methods.
 ```go
@@ -668,4 +671,40 @@ func main() {
 // type Handler interface {
 //     ServeHTTP(w http.ResponseWriter, r *http.Request)
 // }
+```
+
+## Defer And Panic
+Defer statements pushes a function call onto a stack. All the function calls are popped and executed after the surrounding functions returns.
+```go
+func deferexample() {
+  for i := 0; i < 4; i++ {
+  	defer fmt.Println(i)
+   }
+}
+// It will print 3, 2, and 1.
+```
+Panic statements is used in Go to report something which went unexpectedly wrong. We use panic to denote the unexpected errors.
+
+```go
+package main
+import "os"
+
+func main() {
+  panic(" a problem")
+  
+  _, err := os.Create("/tmp/file")
+  if err != nil {
+    panic(err)
+  }
+}
+
+//If we use go run panic.go and if we get an unexpected error when creating a new file
+//the output will be
+//      panic: a problem
+
+//      goroutine 1 [running]:
+//      main.main()
+//	/.../panic.go:12 +0x47
+//       ...
+//       exit status 2
 ```
