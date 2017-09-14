@@ -189,7 +189,7 @@ func outer() (func() int, int) {
         return outer_var // => 101 (but outer_var is a newly redefined
                          //         variable visible only inside inner)
     }
-    return inner, outer_var // => 101, 2 (outer_var is still 2, not mutated by foo!)
+    return inner, outer_var // => 101, 2 (outer_var is still 2, not mutated by inner!)
 }
 ```
 
