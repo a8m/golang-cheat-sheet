@@ -556,7 +556,7 @@ ch := make(chan int) // create a channel of type int
 ch <- 42             // Send a value to the channel ch.
 v := <-ch            // Receive a value from ch
 
-// Non-buffered channels block. Read blocks when no value is available, write blocks if a value already has been written but not read.
+// Non-buffered channels block. Read blocks when no value is available, write blocks until there is a read.
 
 // Create a buffered channel. Writing to a buffered channels does not block if less than <buffer size> unread values have been written.
 ch := make(chan int, 100)
