@@ -321,6 +321,13 @@ func main() {
         case number > 42:
             fmt.Println("Greater")
     }
+    
+    // cases can be presented in comma-separated lists
+    var char byte = '?'
+    switch char {
+        case ' ', '?', '&', '=', '#', '+', '%':
+            fmt.Println("Should escape")
+    }    
 ```
 
 ## Arrays, Slices, Ranges
