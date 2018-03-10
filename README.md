@@ -528,7 +528,7 @@ func doStuff() (int, error) {
 
 func main() {
     result, error := doStuff()
-    if (error != nil) {
+    if error != nil {
         // handle error
     } else {
         // all is good, use result
