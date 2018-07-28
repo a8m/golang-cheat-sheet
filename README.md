@@ -181,15 +181,15 @@ func another_scope() func() int{
 }
 
 
-// Closures: don't mutate outer vars, instead redefine them!
+// Closures
 func outer() (func() int, int) {
     outer_var := 2
     inner := func() int {
-        outer_var += 99 // attempt to mutate outer_var from outer scope
-        return outer_var // => 101 (but outer_var is a newly redefined
-                         //         variable visible only inside inner)
+        outer_var += 99 // outer_var from outer scope is mutated.
+        return outer_var
     }
-    return inner, outer_var // => 101, 2 (outer_var is still 2, not mutated by inner!)
+    inner()
+    return inner, outer_var // return inner func and mutated outer_var 101
 }
 ```
 
@@ -198,7 +198,7 @@ func outer() (func() int, int) {
 func main() {
 	fmt.Println(adder(1, 2, 3)) 	// 6
 	fmt.Println(adder(9, 9))	// 18
-	
+
 	nums := []int{10, 20, 30}
 	fmt.Println(adder(nums...))	// 60
 }
@@ -244,12 +244,12 @@ f := float64(i)
 u := uint(f)
 ```
 
-## Packages 
+## Packages
 * Package declaration at top of every source file
 * Executables are in package `main`
 * Convention: package name == last name of import path (import path `math/rand` => package `rand`)
 * Upper case identifier: exported (visible from other packages)
-* Lower case identifier: private (not visible from other packages) 
+* Lower case identifier: private (not visible from other packages)
 
 ## Control structures
 
@@ -262,14 +262,14 @@ func main() {
 	} else {
 		return -x
 	}
-    	
+
 	// You can put one statement before the condition
 	if a := b + c; a < 42 {
 		return a
 	} else {
 		return a - 42
 	}
-    
+
 	// Type assertion inside if
 	var val interface{}
 	val = "foo"
@@ -306,7 +306,7 @@ func main() {
         fmt.Println("Other")
     }
 
-    // as with for and if, you can have an assignment statement before the switch value 
+    // as with for and if, you can have an assignment statement before the switch value
     switch os := runtime.GOOS; os {
     case "darwin": ...
     }
@@ -321,13 +321,13 @@ func main() {
         case number > 42:
             fmt.Println("Greater")
     }
-    
+
     // cases can be presented in comma-separated lists
     var char byte = '?'
     switch char {
         case ' ', '?', '&', '=', '#', '+', '%':
             fmt.Println("Should escape")
-    }    
+    }
 ```
 
 ## Arrays, Slices, Ranges
@@ -417,7 +417,7 @@ var m = map[string]Vertex{
 
 There are no classes, only structs. Structs can have methods.
 ```go
-// A struct is a type. It's also a collection of fields 
+// A struct is a type. It's also a collection of fields
 
 // Declaration
 type Vertex struct {
@@ -426,7 +426,7 @@ type Vertex struct {
 
 // Creating
 var v = Vertex{1, 2}
-var v = Vertex{X: 1, Y: 2} // Creates a struct by defining values with keys 
+var v = Vertex{X: 1, Y: 2} // Creates a struct by defining values with keys
 var v = []Vertex{{1,2},{5,2},{5,5}} // Initialize a slice of structs
 
 // Accessing members
@@ -450,7 +450,7 @@ func (v *Vertex) add(n float64) {
 }
 
 ```
-**Anonymous structs:**  
+**Anonymous structs:**
 Cheaper and safer than using `map[string]interface{}`.
 ```go
 point := struct {
@@ -466,7 +466,7 @@ r := &Vertex{1, 2} // r is also a pointer to a Vertex
 
 // The type of a pointer to a Vertex is *Vertex
 
-var s *Vertex = new(Vertex) // new creates a pointer to a new struct instance 
+var s *Vertex = new(Vertex) // new creates a pointer to a new struct instance
 ```
 
 ## Interfaces
@@ -625,7 +625,7 @@ func doStuff(channelOut, channelIn chan int) {
   c <- 2
   close(c)
   for i := 0; i < 3; i++ {
-      fmt.Printf("%d ", <-c) 
+      fmt.Printf("%d ", <-c)
   }
   // 1 2 0
   ```
