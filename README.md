@@ -262,6 +262,8 @@ func main() {
 	// Basic one
 	if x > 0 {
 		return x
+	} else if x == 10 {
+		return 10
 	} else {
 		return -x
 	}
