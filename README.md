@@ -260,7 +260,7 @@ u := uint(f)
 ```go
 func main() {
 	// Basic one
-	if x > 0 {
+	if x > 10 {
 		return x
 	} else if x == 10 {
 		return 10
