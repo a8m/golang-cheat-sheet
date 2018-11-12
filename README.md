@@ -416,6 +416,10 @@ var m = map[string]Vertex{
     "Google":    {37.42202, -122.08408},
 }
 
+// iterate over map content
+for key, value := range m {
+}
+
 ```
 
 ## Structs
