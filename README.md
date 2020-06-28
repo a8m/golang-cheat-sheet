@@ -409,6 +409,15 @@ a = make([]byte, 5)	// capacity is optional
 // create a slice from an array
 x := [3]string{"Лайка", "Белка", "Стрелка"}
 s := x[:] // a slice referencing the storage of x
+
+// allocating a 2 dimensional slice for problem Exercise: Slices
+func Pic(dx, dy int) [][]uint8 {
+	mat := make([][]uint8, dy)
+	for i := 0; i < dy; i++ {
+		mat[i] = make([]uint8, dx)
+	}
+	return mat
+}
 ```
 
 ### Operations on Arrays and Slices
