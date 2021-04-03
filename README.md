@@ -37,7 +37,8 @@
     * [Type Switch](#type-switch)
     * [Examples](https://github.com/a8m/reflect-examples)
 19. [Snippets](#snippets)
-    * [Http-Server](#http-server)
+    * [Files Embedding](#files-embedding)
+    * [HTTP Server](#http-server)
 
 ## Credits
 
@@ -718,6 +719,31 @@ func main() {
 ```
 
 # Snippets
+
+## Files Embedding
+
+Go programs can embed static files using the `"embed"` package as follows:
+
+```go
+package main
+
+import (
+	"embed"
+	"log"
+	"net/http"
+)
+
+// content holds the static content (2 files) or the web server.
+//go:embed a.txt b.txt
+var content embed.FS
+
+func main() {
+	http.Handle("/", http.FileServer(http.FS(content)))
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+```
+
+[Full Playground Example](https://play.golang.org/p/pwWxdrQSrYv)
 
 ## HTTP Server
 ```go
