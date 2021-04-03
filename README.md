@@ -583,6 +583,32 @@ func main() {
     }
 }
 ```
+Here's an example:
+```go
+type number struct {
+	n int
+}
+
+// define a sqrt function on "number" type that returns
+// a float64 and error value based on the input
+func (N number) sqrt() (val float64, err error) {
+	if N.n < 0 {
+		err = errors.New("Negative value!")
+		val = 0
+	} else {
+		// err == nil here
+		val = math.Sqrt(float64(N.n))
+	}
+	return
+}
+
+func main() {
+	N := number{-1}
+	_, err := N.sqrt()
+	fmt.Print(err == nil) // false
+}
+
+```
 
 # Concurrency
 
