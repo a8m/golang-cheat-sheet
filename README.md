@@ -570,18 +570,26 @@ type error interface {
 }
 ```
 
-A function that might return an error:
+Here's an example:
 ```go
-func doStuff() (int, error) {
+func sqrt(n float64) (v float64, err error) {
+	if n < 0 {
+		err = errors.New("negative value")
+	} else {
+		v = math.Sqrt(n)
+	}
+	return
 }
 
 func main() {
-    result, err := doStuff()
-    if err != nil {
-        // handle error
-    } else {
-        // all is good, use result
-    }
+	val, err := sqrt(-1)
+	if err != nil {
+		// handle error
+		fmt.Println(err.Error()) // negative value
+	} else {
+		// all is good, use result
+		fmt.Println(val)
+	}
 }
 ```
 
