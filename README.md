@@ -230,7 +230,7 @@ func adder(args ...int) int {
 ```
 
 ## Built-in Types
-```
+```go
 bool
 
 string
@@ -246,6 +246,8 @@ float32 float64
 
 complex64 complex128
 ```
+
+All Go's predeclared identifiers are defined in the [builtin](https://golang.org/pkg/builtin/) package.  
 
 ## Type Conversions
 ```go
@@ -288,8 +290,7 @@ func main() {
 	}
 
 	// Type assertion inside if
-	var val interface{}
-	val = "foo"
+	var val interface{} = "foo"
 	if str, ok := val.(string); ok {
 		fmt.Println(str)
 	}
@@ -441,8 +442,7 @@ for range time.Tick(time.Second) {
 ## Maps
 
 ```go
-var m map[string]int
-m = make(map[string]int)
+m := make(map[string]int)
 m["key"] = 42
 fmt.Println(m["key"])
 
