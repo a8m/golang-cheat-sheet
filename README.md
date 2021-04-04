@@ -563,8 +563,12 @@ var logger *log.Logger = server.Logger
 ```
 
 ## Errors
-There is no exception handling. Functions that might produce an error just declare an additional return value of type `Error`. This is the `Error` interface:
+
+There is no exception handling. Instead, functions that might produce an error just declare an additional return value of type [`error`](https://golang.org/pkg/builtin/#error). This is the `error` interface:
+
 ```go
+// The error built-in interface type is the conventional interface for representing an error condition,
+// with the nil value representing no error.
 type error interface {
     Error() string
 }
@@ -572,24 +576,22 @@ type error interface {
 
 Here's an example:
 ```go
-func sqrt(n float64) (v float64, err error) {
-	if n < 0 {
-		err = errors.New("negative value")
-	} else {
-		v = math.Sqrt(n)
+func sqrt(x float64) (float64, error) {
+	if x < 0 {
+		return 0, errors.New("negative value")
 	}
-	return
+	return math.Sqrt(x), nil
 }
 
 func main() {
 	val, err := sqrt(-1)
 	if err != nil {
 		// handle error
-		fmt.Println(err.Error()) // negative value
-	} else {
-		// all is good, use result
-		fmt.Println(val)
+		fmt.Println(err) // negative value
+		return
 	}
+	// All is good, use `val`.
+	fmt.Println(val)
 }
 ```
 
