@@ -735,21 +735,11 @@ func main() {
 A type assertion provides access to an interface value's underlying concrete value.
 
 ```go
-package main
-
-import "fmt"
-
-func main() {
 	var i interface{} = "hello"
-
-	//The statement asserts that varible value i is of type string
 	s, ok := i.(string)
-
-	//To test whether an interface value holds a specific type, a type assertion can 	 
-  // return two values: the underlying value and a boolean value that reports whether
-	// the assertion succeeded.
+	//Type assertion can return two values: the underlying value and a
+  // boolean value that reports whether the assertion succeeded.
 	fmt.Println(s, ok)
-}
 ```
 
 # Snippets
