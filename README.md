@@ -36,9 +36,11 @@
 18. [Reflection](#reflection)
     * [Type Switch](#type-switch)
     * [Examples](https://github.com/a8m/reflect-examples)
-19. [Snippets](#snippets)
+19. [Type Assertions](#type-assertions)
+20. [Snippets](#snippets)
     * [Files Embedding](#files-embedding)
     * [HTTP Server](#http-server)
+    * [JSON Unmarshal](#json-unmarshal)
 
 ## Credits
 
@@ -308,7 +310,7 @@ func main() {
     }
     for { // you can omit the condition ~ while (true)
     }
-    
+
     // use break/continue on current loop
     // use break/continue with label on outer loop
 here:
@@ -695,7 +697,9 @@ func doStuff(channelOut, channelIn chan int) {
 fmt.Println("Hello, 你好, नमस्ते, Привет, ᎣᏏᏲ") // basic print, plus newline
 p := struct { X, Y int }{ 17, 2 }
 fmt.Println( "My point:", p, "x coord=", p.X ) // print structs, ints, etc
+fmt.Printf("%+v",p) // print keys and values of struct
 s := fmt.Sprintln( "My point:", p, "x coord=", p.X ) // print to string variable
+
 
 fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17,17.0,17.0) // c-ish format
 s2 := fmt.Sprintf( "%d %f", 17, 17.0 ) // formatted print to string variable
@@ -725,6 +729,26 @@ func main() {
 	do(21)
 	do("hello")
 	do(true)
+}
+```
+## Type Assertions
+A type assertion provides access to an interface value's underlying concrete value.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i interface{} = "hello"
+
+	//The statement asserts that varible value i is of type string
+	s, ok := i.(string)
+
+	//To test whether an interface value holds a specific type, a type assertion can 	 
+  // return two values: the underlying value and a boolean value that reports whether
+	// the assertion succeeded.
+	fmt.Println(s, ok)
 }
 ```
 
@@ -783,4 +807,35 @@ func main() {
 // }
 ```
 
+## JSON Unmarshal
+```go
+package main
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main() {
+
+	//Structure in which we want our JSON string to marshall
+	type Lesson struct {
+		Id      int    `json:"id"`
+		Content string `json:"content"`
+	}
+	str := `{
+  		 "id":1,
+   		"content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+		}`
+
+	lsn := &Lesson{}
+	// json.Unmarshal has two parameters: first is byte array
+	// and second is pointer of target struct
+	err := json.Unmarshal([]byte(str), lsn)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("UnMarshalled %+v", *lsn)
+
+}
+```
