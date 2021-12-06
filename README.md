@@ -708,7 +708,7 @@ hellomsg := `
 
 ## Reflection
 ### Type Switch
-A type switch is like a regular switch statement, but the cases in a type switch specify types (not values), and those types are compared against the type of the value held by the given interface value.
+A type switch is like a regular switch statement, but the cases in a type switch specify types (not values) which are compared against the type of the value held by the given interface value.
 ```go
 func do(i interface{}) {
 	switch v := i.(type) {
