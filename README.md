@@ -708,7 +708,7 @@ hellomsg := `
 
 ## Reflection
 ### Type Switch
-A type switch is like a regular switch statement, but the cases in a type switch specify types (not values), and those values are compared against the type of the value held by the given interface value.
+A type switch is like a regular switch statement, but the cases in a type switch specify types (not values) which are compared against the type of the value held by the given interface value.
 ```go
 func do(i interface{}) {
 	switch v := i.(type) {
@@ -743,7 +743,7 @@ import (
 	"net/http"
 )
 
-// content holds the static content (2 files) or the web server.
+// content holds the static content (2 files) for the web server.
 //go:embed a.txt b.txt
 var content embed.FS
 
