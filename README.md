@@ -36,7 +36,8 @@
 18. [Reflection](#reflection)
     * [Type Switch](#type-switch)
     * [Examples](https://github.com/a8m/reflect-examples)
-19. [Snippets](#snippets)
+19. [Generics](#generics)
+20. [Snippets](#snippets)
     * [Files Embedding](#files-embedding)
     * [HTTP Server](#http-server)
 
@@ -59,6 +60,7 @@ If you're new to Go, do that tour. Seriously.
 * Has closures
 * Pointers, but not pointer arithmetic
 * Built-in concurrency primitives: Goroutines and Channels
+* Generics (Go version >= 1.18)
 
 # Basic Syntax
 
@@ -725,6 +727,36 @@ func main() {
 	do(21)
 	do("hello")
 	do(true)
+}
+```
+
+## Generics
+With Go 1.18 or later, we can use generics to declare and use functions or types that are written to work with any of a set of types provided by calling code.
+```go
+// SumIntsOrFloats sums the values of map m. It supports both int64 and float64 as types for map values.
+func SumIntsOrFloats[K comparable, V int64 | float64](m map[K]V) V {
+	var s V
+	for _, v := range m {
+		s += v
+	}
+	return s
+}
+
+func main() {
+	// Initializing a map for the integer values
+	ints := map[string]int64{
+		"first":  34,
+		"second": 12,
+	}
+
+	// Initializing a map for the float values
+	floats := map[string]float64{
+		"first":  35.98,
+		"second": 26.99,
+	}
+
+	// Generic Sums: 46 and 62.97
+	fmt.Printf("Generic Sums: %v and %v\n", SumIntsOrFloats(ints), SumIntsOrFloats(floats))
 }
 ```
 
