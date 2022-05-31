@@ -1,0 +1,97 @@
+% LAST UPDATED: MAY 31, 2022
+% AUTHOR: @jishanshaikh4
+
+\documentclass[8pt]{article}
+\usepackage[a4paper,left=0.2in,right=0.2in,top=0.7in,bottom=0.2in]{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tocloft}
+\usepackage{pdflscape}
+\usepackage{multicol}
+\usepackage{amsmath, amssymb, amsfonts}
+
+\renewcommand*{\ttdefault}{pcr}
+\renewcommand\cftsecfont{\fontsize{8}{9}\bfseries}
+\renewcommand\cftsecpagefont{\fontsize{8}{9}\mdseries}
+\renewcommand\cftsubsecfont{\fontsize{5}{6}\mdseries}
+\renewcommand\cftsubsecpagefont{\fontsize{5}{6}\mdseries}
+\renewcommand\cftsecafterpnum{\vspace{-1ex}}
+\renewcommand\cftsubsecafterpnum{\vspace{-1ex}}
+
+\newcommand{\Section}[1]{
+    \section*{#1}
+    \addcontentsline{toc}{subsection}{#1}
+    \vspace{-3mm}
+}
+
+\newcommand{\Topic}[1]{\textbf{#1}}
+
+\lstdefinestyle{shared}{
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    basicstyle=\fontsize{8}{6}\ttfamily,
+}
+\lstdefinestyle{cpp}{
+	style=shared,
+    language=C++,
+    keywordstyle=\bfseries\color{green!40!black},
+    commentstyle=\itshape\color{red!20!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{purple!40!black},
+}
+\lstdefinestyle{py}{
+    style=shared,
+    language=Python,
+    keywordstyle=\bfseries\color{green!40!black},
+    commentstyle=\itshape\color{purple!40!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{orange},
+}
+\lstdefinestyle{java}{
+    style=shared,
+    language=Java,
+    keywordstyle=\bfseries\color{green!40!black},
+    commentstyle=\itshape\color{purple!40!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{orange},
+}
+\lstdefinestyle{txt}{
+    style=shared,
+}
+\lstset{escapechar=@}
+
+\pagestyle{fancy}
+\fancyhead[L]{Golang Cheat Sheet, v2022.1}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+
+\fancypagestyle{plain}
+{
+\fancyhead[L]{Golang Cheat Sheet, v2022.1}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+}
+
+\title{\vspace{-4ex}\Large{Golang Cheat Sheet, v2022.1}}
+\author{}
+\date{}
+
+\begin{document}
+\begin{landscape}
+\begin{multicols}{3}
+
+\maketitle
+\vspace{-13ex}
+\tableofcontents
+\pagestyle{fancy}
+
+\input contents.tex
+
+\end{multicols}
+
+\end{landscape}
+\end{document}
