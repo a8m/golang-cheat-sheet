@@ -484,8 +484,10 @@ v.X = 4
 // You can declare methods on structs. The struct you want to declare the
 // method on (the receiving type) comes between the the func keyword and
 // the method name. The struct is copied on each method call(!)
+// Changed code HERE:
+// Explanation : math.sqrt takes float64 as input but the expression returns INT.
 func (v Vertex) Abs() float64 {
-    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    return math.Sqrt(float64(v.X*v.X + v.Y*v.Y))
 }
 
 // Call method
@@ -493,6 +495,9 @@ v.Abs()
 
 // For mutating methods, you need to use a pointer (see below) to the Struct
 // as the type. With this, the struct value is not copied for the method call.
+//Changed code HERE:
+// Explanation : v.X and v.Y are int but n is float64 so following operations will 
+// raise an Error. (TYPE_MISMATCH)
 func (v *Vertex) add(n float64) {
     v.X += n
     v.Y += n
