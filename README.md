@@ -498,7 +498,7 @@ v.Abs()
 //Changed code HERE:
 // Explanation : v.X and v.Y are int but n is float64 so following operations will 
 // raise an Error. (TYPE_MISMATCH)
-func (v *Vertex) add(n float64) {
+func (v *Vertex) add(n int) {
     v.X += n
     v.Y += n
 }
