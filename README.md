@@ -470,7 +470,7 @@ There are no classes, only structs. Structs can have methods.
 
 // Declaration
 type Vertex struct {
-    X, Y int
+    X, Y float64
 }
 
 // Creating
