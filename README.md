@@ -125,6 +125,13 @@ var foo = 42 // type omitted, will be inferred
 foo := 42 // shorthand, only in func bodies, omit var keyword, type is always implicit
 const constant = "This is a constant"
 
+// Declaring multiple variables at once
+var (
+	aaa int 
+	bbb int = 8
+	ccc string = "a"
+)
+
 // iota can be used for incrementing numbers, starting from 0
 const (
     _ = iota
