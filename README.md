@@ -32,6 +32,7 @@
     * [Goroutines](#goroutines)
     * [Channels](#channels)
     * [Channel Axioms](#channel-axioms)
+17. [Zero Values](#zero-values)
 17. [Printing](#printing)
 18. [Reflection](#reflection)
     * [Type Switch](#type-switch)
@@ -688,7 +689,21 @@ func doStuff(channelOut, channelIn chan int) {
   }
   // 1 2 0
   ```
+# Zero Values
+| Type           | Zero Value |
+| :------------- | :--------- |
+| Integer        | 0          |
+| Floating point | 0.0        |
+| Boolean        | false      |
+| String         | ""         |
+| Pointer        | nil        |
+| Interface      | nil        |
+| Slice          | nil        |
+| Map            | nil        |
+| Channel        | nil        |
+| Function       | nil        |
 
+> The elements of an array or struct will have its fields zeroed if no value is specified. This initialization is done recursively
 ## Printing
 
 ```go
