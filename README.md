@@ -510,8 +510,8 @@ point := struct {
 ## Pointers
 ```go
 p := Vertex{1, 2}  // p is a Vertex
-q := &p            // q is a pointer to a Vertex
-r := &Vertex{1, 2} // r is also a pointer to a Vertex
+q := &p            // q is a pointer to "p" Vertex
+r := &Vertex{1, 2} // r is also a pointer to another Vertex
 
 // The type of a pointer to a Vertex is *Vertex
 
