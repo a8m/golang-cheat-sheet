@@ -181,6 +181,23 @@ func main() {
     fmt.Println(add(3, 4))
 }
 
+// this shows function passed as argument in another function
+//Functions are values too. They can be passed around just like other values.
+//Function values may be used as function arguments and return values.
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+func main() {
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	fmt.Println(hypot(5, 12))
+
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+}
+
 // Closures, lexically scoped: Functions can access values that were
 // in scope when defining the function
 func scope() func() int{
@@ -196,6 +213,10 @@ func another_scope() func() int{
 }
 
 
+//Go functions may be closures. A closure is a function value that references variables from outside its body. 
+//The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+//For example, the outer() function returns a closure. Each closure is bound to its own `outer_var` variable.
+
 // Closures
 func outer() (func() int, int) {
     outer_var := 2
@@ -206,6 +227,68 @@ func outer() (func() int, int) {
     inner()
     return inner, outer_var // return inner func and mutated outer_var 101
 }
+
+// another example would be an "adder()" function (Taken from go tour)
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func main() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+Output:-
+0 0
+1 -2
+3 -6
+6 -12
+10 -20
+15 -30
+21 -42
+28 -56
+36 -72
+45 -90
+
+//e.g from https://tour.golang.org/moretypes/26
+package main
+import "fmt"
+
+// fibonacci is a function that returns
+// a function that returns an int.
+func fibonacci() func() int {
+	f1, f2 := 0, 1
+	return func() int {
+		f := f1
+		f1, f2 = f2, f1 + f2
+		return f
+	}
+}
+func main() {
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
+}
+Output:-
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
 ```
 
 ### Variadic Functions
@@ -411,6 +494,15 @@ a = make([]byte, 5)	// capacity is optional
 // create a slice from an array
 x := [3]string{"Лайка", "Белка", "Стрелка"}
 s := x[:] // a slice referencing the storage of x
+
+// allocating a 2 dimensional slice for problem Exercise: Slices
+func Pic(dx, dy int) [][]uint8 {
+	mat := make([][]uint8, dy)
+	for i := 0; i < dy; i++ {
+		mat[i] = make([]uint8, dx)
+	}
+	return mat
+}
 ```
 
 ### Operations on Arrays and Slices
@@ -496,6 +588,33 @@ v.Abs()
 func (v *Vertex) add(n float64) {
     v.X += n
     v.Y += n
+}
+
+
+//You can declare a method on non-struct types, too.
+//In this example we see a numeric type MyFloat with an Abs method.
+//You can only declare a method with a receiver whose type is defined in the same package as the method. 
+//You cannot declare a method with a receiver whose type is defined in another package (which includes the built-in types such as int).
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+func main() {
+	f := MyFloat(-math.Sqrt2)
+	fmt.Println(f.Abs())
 }
 
 ```
