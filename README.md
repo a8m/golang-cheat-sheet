@@ -39,6 +39,7 @@
 19. [Snippets](#snippets)
     * [Files Embedding](#files-embedding)
     * [HTTP Server](#http-server)
+20. [Defer](#defer)
 
 ## Credits
 
@@ -781,6 +782,49 @@ func main() {
 // type Handler interface {
 //     ServeHTTP(w http.ResponseWriter, r *http.Request)
 // }
+```
+
+# Defer
+
+`defer` in Go is used to schedule a function call to be executed just before the surrounding function returns, allowing for cleanup and resource management.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    // Scenario 1: Defer a function call.
+    defer funcCall("Scenario 1")
+
+    // Scenario 2: Defer multiple function calls.
+    defer funcCall("Scenario 2 - First")
+    defer funcCall("Scenario 2 - Second")
+
+    // Scenario 3: Defer inside loops.
+    for i := 1; i <= 3; i++ {
+        defer funcCall(fmt.Sprintf("Scenario 3 - Iteration %d", i))
+    }
+
+    // Scenario 4: Defer before a function call.
+    defer funcCall("Scenario 4 - Defer Before")
+    funcCall("Scenario 4 - Function Call")
+
+    // Scenario 5: Defer in a function that returns a value.
+    result := funcWithDefer("Scenario 5")
+    fmt.Println(result)
+}
+
+func funcCall(message string) {
+    // This function will be deferred and executed at the end of main.
+    fmt.Println("Deferred:", message)
+}
+
+func funcWithDefer(message string) string {
+    // Defer can also be used in functions that return values.
+    defer funcCall("Deferred Inside Function")
+    return "Returned: " + message
+}
 ```
 
 
