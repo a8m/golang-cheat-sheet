@@ -39,6 +39,10 @@
 19. [Snippets](#snippets)
     * [Files Embedding](#files-embedding)
     * [HTTP Server](#http-server)
+20. [Generics](#generics)
+    * [Type Parameters](#type-parameters)
+    * [Constraints](#constraints)
+    * [Generic Types](#generic-types)
 
 ## Credits
 
@@ -247,7 +251,7 @@ float32 float64
 complex64 complex128
 ```
 
-All Go's predeclared identifiers are defined in the [builtin](https://golang.org/pkg/builtin/) package.  
+All Go's predeclared identifiers are defined in the [builtin](https://golang.org/pkg/builtin/) package.
 
 ## Type Conversions
 ```go
@@ -308,7 +312,7 @@ func main() {
     }
     for { // you can omit the condition ~ while (true)
     }
-    
+
     // use break/continue on current loop
     // use break/continue with label on outer loop
 here:
@@ -783,4 +787,78 @@ func main() {
 // }
 ```
 
+## Generics
 
+Generics in Go, introduced in Go 1.18, allow for writing functions and types that are abstracted over types, which can be specified when the function or type is used.
+
+### Type Parameters
+
+A generic function with **type parameters** allows the function to operate on different types without specifying the exact types it works with in the function definition.
+
+```go
+// Here, T is a type parameter that can be any type.
+func GenericPrint[T any](value T) {
+    fmt.Println(value)
+}
+
+func main() {
+    GenericPrint("Hello, Generics!") // for string
+    GenericPrint(123)                // for int
+    GenericPrint(3.14)               // for float64
+}
+```
+
+### Constraints
+
+**Constraints** are used in generics to specify the capabilities required of the type parameters, like needing them to implement a certain interface or be a certain kind of type.
+
+```go
+// Deduplicate takes a slice of any comparable type and returns a slice with unique elements.
+func Deduplicate[T comparable](slice []T) []T {
+    unique := make(map[T]bool)
+    var result []T
+
+    for _, v := range slice {
+        if _, exists := unique[v]; !exists {
+            unique[v] = true
+            result = append(result, v)
+        }
+    }
+
+    return result
+}
+
+func main() {
+    ints := []int{1, 2, 2, 3, 4, 4, 4, 5}
+    fmt.Println("Unique ints:", Deduplicate(ints))       // for ints
+
+    strings := []string{"apple", "orange", "apple", "banana", "orange"}
+    fmt.Println("Unique strings:", Deduplicate(strings)) // for strings
+}
+```
+
+### Generic Types
+
+**Generic types** allow the creation of data structures that can work with any type, such as a generic container, without specifying the exact type it contains in the definition.
+
+```go
+// GenericSlice is a generic type that can hold a slice of any type.
+type GenericSlice[T any] []T
+
+// AppendValue appends a value with any type to the slice.
+func (s *GenericSlice[T]) AppendValue(value T) {
+    *s = append(*s, value)
+}
+
+func main() {
+    intSlice := GenericSlice[int]{}
+    intSlice.AppendValue(1)
+    intSlice.AppendValue(2)
+    fmt.Println("Slice of ints:", intSlice)       // for GenericSlice[int]
+
+    stringSlice := GenericSlice[string]{}
+    stringSlice.AppendValue("Hello")
+    stringSlice.AppendValue("Generics")
+    fmt.Println("Slice of strings:", stringSlice) // for GenericSlice[string]
+}
+```
